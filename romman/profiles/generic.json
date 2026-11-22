@@ -1,0 +1,5 @@
+{
+  "name": "Generic disassembly rebuild",
+  "description": "Generic disassembly rebuild profile. Add known range rules as needed.",
+  "rules": []
+}

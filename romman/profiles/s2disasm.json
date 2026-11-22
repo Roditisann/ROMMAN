@@ -1,0 +1,5 @@
+{
+  "name": "Sonic 2 Git Disasm (S2DISASM)",
+  "description": "Starter rule profile for S2 Git Disasm. Add documented byte/range rules here. Actions: prefer_patch, prefer_base, prefer_rebuild, ignore.",
+  "rules": []
+}

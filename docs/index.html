@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ROMMAN - ROM Hack Merger</title>
+  <style>
+    :root { --bg:#111; --panel:#1a1a1a; --fg:#eee; --muted:#aaa; --line:#333; --accent:#fff; }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family: Consolas, "Courier New", monospace; background:var(--bg); color:var(--fg); line-height:1.5; }
+    .wrap { max-width: 920px; margin: 0 auto; padding: 32px 20px 64px; }
+    .hero { display:flex; gap:24px; align-items:center; border-bottom:1px solid var(--line); padding-bottom:24px; margin-bottom:24px; }
+    .hero img { width:96px; height:96px; image-rendering: pixelated; background:#000; border:1px solid var(--line); }
+    h1 { margin:0; font-size: 2.2rem; letter-spacing: 0.04em; }
+    .tag { color:var(--muted); margin-top:6px; }
+    .btns { margin-top:14px; display:flex; gap:10px; flex-wrap:wrap; }
+    .btn { display:inline-block; padding:10px 14px; border:1px solid var(--fg); color:var(--bg); background:var(--fg); text-decoration:none; font-weight:bold; }
+    .btn.alt { background:transparent; color:var(--fg); border-color:var(--line); }
+    h2 { margin-top: 28px; font-size: 1.1rem; border-bottom:1px solid var(--line); padding-bottom:6px; }
+    ul { padding-left: 20px; }
+    li { margin: 6px 0; }
+    code, pre { background:#000; border:1px solid var(--line); }
+    code { padding: 1px 4px; }
+    pre { padding: 14px; overflow:auto; }
+    .grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap:12px; }
+    .card { background:var(--panel); border:1px solid var(--line); padding:14px; }
+    .muted { color:var(--muted); }
+    footer { margin-top:36px; color:var(--muted); font-size:0.9rem; border-top:1px solid var(--line); padding-top:16px; }
+    a { color: var(--fg); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="hero">
+      <img src="Rommie.png" alt="Rommie mascot">
+      <div>
+        <h1>ROMMAN</h1>
+        <div class="tag">Merge multiple ROM hacks — with conflict detection and per-region control.</div>
+        <div class="btns">
+          <!-- Replace # with your GitHub releases URL -->
+          <a class="btn" href="#">Download</a>
+          <a class="btn alt" href="https://github.com/USERNAME/romman">GitHub</a>
+        </div>
+      </div>
+    </div>
+
+    <p>ROMMAN loads multiple patches or full ROM dumps, analyzes which ROM addresses each hack modifies, detects overlaps, and merges them into a single output. When conflicts exist, you can resolve them by global priority or per-region Smart Merge.</p>
+
+    <h2>Features</h2>
+    <div class="grid">
+      <div class="card"><strong>Formats</strong><div class="muted">Input: IPS, BPS, XDelta, .bin/.nes/.md/.gen. Output: bin/nes/unh/ips/bps/xdelta.</div></div>
+      <div class="card"><strong>Conflict control</strong><div class="muted">Detects overlaps, clusters nearby regions, and supports Smart Merge per-region decisions.</div></div>
+      <div class="card"><strong>Disassembly-aware</strong><div class="muted">Profiles/rules, optional symbol map, build hook, and best-effort rebase for shifted disassembly rebuilds.</div></div>
+      <div class="card"><strong>ROM fixups</strong><div class="muted">Base CRC32/MD5 display, NES header handling, Genesis/GB/GBC/SNES checksum fixups.</div></div>
+      <div class="card"><strong>Preview</strong><div class="muted">Launch merged or individual hacks in a configured emulator (RetroArch/BlastEm/etc.).</div></div>
+      <div class="card"><strong>CLI + GUI</strong><div class="muted">Scriptable CLI and a simple black/white Tk GUI.</div></div>
+    </div>
+
+    <h2>Quick Start</h2>
+    <pre><code># Check conflicts
+romman base.bin hack1.ips hack2.bps --check
+
+# Merge with priority (first wins conflicts)
+romman base.bin hack1.ips hack2.bps -o merged.bin --priority hack1.ips hack2.bps
+
+# GUI
+python -m romman.gui</code></pre>
+
+    <h2>Notes</h2>
+    <ul>
+      <li><strong>Byte merge != semantic merge.</strong> A clean merge can still be logically incompatible.</li>
+      <li>Disassembly rebase is best-effort; ambiguous offsets are skipped to avoid corruption.</li>
+      <li>Always test merged ROMs in an emulator or appropriate hardware workflow.</li>
+    </ul>
+
+    <footer>
+      <div>ROMMAN by Roditisann. This is Rommie. Don't mind him.</div>
+    </footer>
+  </div>
+</body>
+</html>
